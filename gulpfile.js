@@ -17,9 +17,9 @@ var gulp = require('gulp'), //本地安装gulp所用到的地方
     livereload = require('gulp-livereload'),
     fileinclude = require('gulp-file-include'),
     eslint = require('gulp-eslint'),                          //gulp-eslint插件
-    eslint-plugin-html = require('eslint-plugin-html'),
+    ephtml = require('eslint-plugin-html'),
     banner = '/*! <%= pkg.name %> - git - <%= moment().format("YYYY-MM-DD HH:mm:ss") %> */\r\n',
-    banner2 = '/* eslint-disable */'
+    banner2 = '/* what??? */'
 
 
 //定义一个testLess任务（自定义任务名称）
@@ -42,7 +42,7 @@ gulp.task('header', function () {
 gulp.task('newheader',function () {
     gulp.src('src/jsdev/*.js')
         .pipe(header(banner2))
-        .pipe(gulp.dest('js'))
+        .pipe(gulp.dest('src/jsdev/'))     // 将处理完的文件地址写为原来的地址就会将改变在当前文件中了
 });
 // del 删除文件／文件夹测试
 gulp.task('del', function () {
