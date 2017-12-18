@@ -16,7 +16,7 @@ var gulp = require('gulp'), //本地安装gulp所用到的地方
     webpack = require('webpack'),
     livereload = require('gulp-livereload'),
     fileinclude = require('gulp-file-include'),
-    eslint = require('gulp-eslint'),
+    eslint = require('gulp-eslint'),                          //gulp-eslint插件
     eslint-plugin-html = require('eslint-plugin-html'),
     banner = '/*! <%= pkg.name %> - git - <%= moment().format("YYYY-MM-DD HH:mm:ss") %> */\r\n',
     banner2 = '/* eslint-disable */'
@@ -120,12 +120,31 @@ gulp.task('build',['multidata'], function () {
         .pipe(gulp.dest('store'))
     console.log('编译完成')
 });
+
+
+
+
+
+
+// 这里是分割线
+gulp.task('lint',function () {
+    // 注意层级
+    return gulp.src(['jsdev/*.js','!node_modules/**'])
+        .pipe(eslint())
+        //输出校验的结果到控制台
+        .pipe(eslint.format())
+        //出现错误后停止程序的运行并抛出错误对象
+        .pipe(eslint.failAfterError());
+})
+gulp.task('default',['lint'],function () {
+        // 这里的代码只有在lint没有出错的前提下才会执行
+})
 // 创建监听任务，当文件发生变化，自动执行相应的任务
 gulp.task('watch', function () {
     gulp.watch('./src/less/*.less', ['testLess'])
 })
 //默认任务
-gulp.task('default',['testLess']); //定义默认任务
+//gulp.task('default',['testLess']); //定义默认任务
 
 //gulp.task(name[, deps], fn) 定义任务  name：任务名称 deps：依赖任务名称 fn：回调函数
 //gulp.src(globs[, options]) 执行任务处理的文件  globs：处理的文件路径(字符串或者字符串数组)
