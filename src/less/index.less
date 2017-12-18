@@ -1,0 +1,11 @@
+.rounded-corners(@radius: 15px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+#header{
+  .rounded-corners;    //调用了上面定义好的那个设置圆角的函数
+}
+#footer{
+  .rounded-corners(85px); //同样调用了上面定义好的那个设置圆角的函数，并且给函数传递了参数而没有使用默认值。
+}

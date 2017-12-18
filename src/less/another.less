@@ -1,0 +1,15 @@
+@the-border: 15px;
+@base-color: #111;
+@red: #842210;
+
+
+
+#header{
+  color: @base-color * 5;
+  border-left: @the-border;
+  border-right: @the-border * 2;
+}
+#footer {
+  color: @base-color + #003300;
+  border-color: desaturate(@red, 10%);   //这里用到了less中的一个函数desaturate，用来设置颜色的饱和度。
+}
