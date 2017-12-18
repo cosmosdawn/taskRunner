@@ -1,0 +1,11 @@
+@r : 16/750rem
+
+.a {
+  background: red;
+  .b {
+    color: black;
+  }
+  .b .c {
+    text-align: center;
+  }
+}

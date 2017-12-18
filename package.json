@@ -6,12 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "dev": "webpack-dev-server --inline --hot --content-base build/"
+    "dev": "webpack-dev-server --inline --hot --content-base build/",
+    "lint": "eslint --ext .js,.vue src jsdev"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "del": "^3.0.0",
+    "eslint-plugin-html": "^4.0.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-eslint": "^4.0.0",

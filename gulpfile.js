@@ -16,7 +16,10 @@ var gulp = require('gulp'), //本地安装gulp所用到的地方
     webpack = require('webpack'),
     livereload = require('gulp-livereload'),
     fileinclude = require('gulp-file-include'),
-    banner = '/*! <%= pkg.name %> - git - <%= moment().format("YYYY-MM-DD HH:mm:ss") %> */\r\n'
+    eslint = require('gulp-eslint'),
+    eslint-plugin-html = require('eslint-plugin-html'),
+    banner = '/*! <%= pkg.name %> - git - <%= moment().format("YYYY-MM-DD HH:mm:ss") %> */\r\n',
+    banner2 = '/* eslint-disable */'
 
 
 //定义一个testLess任务（自定义任务名称）
@@ -38,10 +41,7 @@ gulp.task('header', function () {
 });
 gulp.task('newheader',function () {
     gulp.src('src/jsdev/*.js')
-        .pipe(header(banner,{
-            pkg: pkg,
-            moment: moment
-        }))
+        .pipe(header(banner2))
         .pipe(gulp.dest('js'))
 });
 // del 删除文件／文件夹测试
