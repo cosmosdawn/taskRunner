@@ -24,46 +24,42 @@ var gulp = require('gulp'), //本地安装gulp所用到的地方
 
 //定义一个testLess任务（自定义任务名称）
 gulp.task('testLess', function () {
-    gulp.src('src/less/*.less') //该任务针对的文件
-        .pipe(less()) //该任务调用的模块
-        .pipe(gulp.dest('src/css')); //将会在src/css下生成index.css
-});
-gulp.task('less2css',function () {
-    gulp.src('less/*.less')
-        .pipe(less())
-        .pipe(gulp.dest('css'))
-})
+    gulp.src('src/less/*.less')         //该任务针对的文件
+        .pipe(less())                   //该任务调用的模块
+        .pipe(gulp.dest('src/css'));    //将会在src/css下生成index.css
+});                                     // done
 // gulp-header 测试    给文件加一个头
 gulp.task('header', function () {
     gulp.src('src/jsdev/*.js')
-        .pipe(header('Hello ${name}\n', { name : 'World'} ))
-        .pipe(gulp.dest('js'))
-});
-gulp.task('newheader',function () {
-    gulp.src('src/jsdev/*.js')
-        .pipe(header(banner2))
-        .pipe(gulp.dest('src/jsdev/'))     // 将处理完的文件地址写为原来的地址就会将改变在当前文件中了
-});
+        .pipe(header('Hello ${name}\n', { name : 'xiaoyu'} ))
+        .pipe(gulp.dest('src/js'))
+});                                     //done
 // del 删除文件／文件夹测试
 gulp.task('del', function () {
-    del(['src/css/*.css']).then(function () {
+    del(['src/css/*.css','src/css/*.less']).then(function () {    // del接收一个数组，里面的每一项匹配一个要删除的文件的条件
         console.log('files have been deleted')
     })
-});
+});                                     //done
+// 有选择的删除
+gulp.task('delhashcss', function () {
+    del(['src/css/*.css','!src/css/a.css','!src/css/b.css','!src/css/c.css']).then(function () {
+        console.log('除了最初的三个css文件其余文件都已经删除了')
+    })
+})
 // hash测试
 gulp.task('hash', function () {
     gulp.src('src/css/*.css')
-        .pipe(hash())
+        .pipe(hash())               // 给文件名字追加添加哈希值
         .pipe(gulp.dest('src/css'))
-        .pipe(hash.manifest('assets.json', {
-            deleteOld: true,
-            sourceDir: __dirname + '/public/js'
-        })) // Switch to the manifest file
-        .pipe(gulp.dest('public')); // Write the manifest file
+        .pipe(hash.manifest('assets.json', {      // manifest 翻译为'货单'，是生成一个变换前后对应的json文件，文件名称由自己指定
+            deleteOld: true                       // 生成新的之前删除旧的
+        }))
+    .pipe(gulp.dest('public'));                  //done
 });
 // watch 测试
 gulp.task('gulpWatch', function () {
     return watch('src/less/*.less')
+        .pipe(less())
         .pipe(gulp.dest('src/css'))
 
 });
@@ -76,22 +72,22 @@ gulp.task('file-include',function () {
         }))
         .pipe(gulp.dest('dist'))
 });
-gulp.task('pkg', function () {
+gulp.task('pkg', function () {        // pkg代表的是package.json配置文件
     var banner = ['/**',
         ' * <%= pkg.name %> - <%= pkg.description %>',
         ' * @version v<%= pkg.version %>',
         ' * @link <%= pkg.homepage %>',
         ' * @license <%= pkg.license %>',
         ' */',
-        ''].join('\n');
+        ''].join('\n');          // 用换行符号链接起来，形成一段注释的字符串
     gulp.src('src/jsdev/*.js')
-        .pipe(header(banner, { pkg : pkg } ))
+        .pipe(header(banner, { pkg : pkg } ))   // header 可以在文件头部添加一段由模版产生的文字描述
         .pipe(gulp.dest('js'))
 })
 // 合并css
 gulp.task('minifycss', ['testLess'], function () {
     gulp.src('./src/css/*.css')
-        .pipe(concat('all-in-one.css')) // 合并后的css文件名
+        .pipe(concat('all-in-one.css'))  // 合并后的css文件名
         .pipe(minifycss())               // 压缩css代码（去除里面的空格，不可读化）
         .pipe(gulp.dest('dest'))
 })
@@ -101,7 +97,7 @@ gulp.task('log', function () {
 });
 // 复制文件到另一个目录
 gulp.task('copyfiles', function () {
-    gulp.src('./src/less/index.less')    //  匹配到的文件
+    gulp.src('./src/less/b.less')    //  匹配到的文件
         .pipe(gulp.dest('dist'))         //  复制到dist文件夹下，如果没有这个文件夹就新建
 });
 //复制图片
