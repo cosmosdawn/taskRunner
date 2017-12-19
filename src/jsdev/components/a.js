@@ -1,7 +1,9 @@
-/* what??? */
-/* what??? */
-
+/* eslint-disable */
 function a(num) {
-    return num;
+    console.log(num)
 }
-a();
+a(8)
+
+const a  = new Vue({
+
+})
