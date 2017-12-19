@@ -2,6 +2,7 @@
 /* what??? */
 
 
-function a() {
-    console.log('this is a test b')
+function b(value) {
+    return value + 1;
 }
+b(5);

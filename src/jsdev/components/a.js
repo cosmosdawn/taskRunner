@@ -1,7 +1,7 @@
 /* what??? */
 /* what??? */
 
-
-function a() {
-    console.log('this is a test a')
+function a(num) {
+    return num;
 }
+a();
