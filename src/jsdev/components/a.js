@@ -4,6 +4,6 @@ function a(num) {
 }
 a(8)
 
-const a  = new Vue({
+const b  = new Vue({
 
 })
