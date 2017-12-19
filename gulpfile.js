@@ -19,8 +19,14 @@ var gulp = require('gulp'), //本地安装gulp所用到的地方
     eslint = require('gulp-eslint'),                          //gulp-eslint插件
     ephtml = require('eslint-plugin-html'),
     banner = '/*! <%= pkg.name %> - git - <%= moment().format("YYYY-MM-DD HH:mm:ss") %> */\r\n',
-    banner2 = '/* what??? */'
+    banner2 = '/* eslint-disable */\r\n'
 
+
+gulp.task('add', function () {
+    gulp.src(['src/jsdev/*.js','src/jsdev/**/*.js'])
+        .pipe(header(banner2))
+        .pipe(gulp.dest('src/jsdev/'))
+})
 
 //定义一个testLess任务（自定义任务名称）
 gulp.task('testLess', function () {

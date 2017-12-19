@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "dev": "webpack-dev-server --inline --hot --content-base build/",
-    "lint": "eslint --ext .js,.vue src jsdev",
+    "lint": "eslint --ext .js src/jsdev",
     "prepush": "npm run lint"
   },
   "author": "",
