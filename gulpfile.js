@@ -94,9 +94,15 @@ gulp.task('pkg', function () {        // pkg代表的是package.json配置文件
 gulp.task('minifycss', ['testLess'], function () {
     gulp.src('./src/css/*.css')
         .pipe(concat('all-in-one.css'))  // 合并后的css文件名
-        .pipe(minifycss())               // 压缩css代码（去除里面的空格，不可读化）
+        //.pipe(minifycss())               // 压缩css代码（去除里面的空格，不可读化）
         .pipe(gulp.dest('dest'))
 })
+
+gulp.task('minifyjs', function() {
+    gulp.src(['./src/jsdev/*.js','./src/jsdev/**/*.js'])
+        .pipe(concat('all-in-one.js'))
+        .pipe(gulp.dest('dest/js'))
+});
 // 控制台打印输出
 gulp.task('log', function () {
     console.log('i logged some thing')
